@@ -30,10 +30,6 @@ parts:
     plugin: nil
     overlay-packages:
       - rabbitmq-server
-  management-plugin:
-    plugin: nil
-    after:
-      - rabbitmq
     override-prime: |
       craftctl default
       # Enable Management Plugin by default
