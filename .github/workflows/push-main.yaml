@@ -11,3 +11,6 @@ on:
 jobs:
   build:
     uses: ./.github/workflows/build-rock.yaml
+  publish:
+    needs: build
+    uses: ./.github/workflows/publish.yaml
