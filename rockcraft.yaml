@@ -33,4 +33,5 @@ parts:
     override-prime: |
       craftctl default
       # Enable Management Plugin by default
+      mkdir -p $CRAFT_PRIME/etc/rabbitmq
       echo "[rabbitmq_management]." > $CRAFT_PRIME/etc/rabbitmq/enabled_plugins
