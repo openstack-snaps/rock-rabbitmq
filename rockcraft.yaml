@@ -10,20 +10,24 @@ platforms:
 services:
   rabbitmq:
     override: replace
-    startup: enabled
+    startup: disabled
     summary: RabbitMQ message broker
     command: rabbitmq-server
     user: rabbitmq
     group: rabbitmq
     requires:
       - epmd
+    environment:
+      TZ: UTC
   epmd:
     override: replace
-    startup: enabled
+    startup: disabled
     summary: Erlang EPM service
     command: epmd
     user: rabbitmq
     group: rabbitmq
+    environment:
+      TZ: UTC
 
 parts:
   rabbitmq:
@@ -35,3 +39,6 @@ parts:
       # Enable Management Plugin by default
       mkdir -p $CRAFT_PRIME/etc/rabbitmq
       echo "[rabbitmq_management]." > $CRAFT_PRIME/etc/rabbitmq/enabled_plugins
+      # Set some sane default logging for ROCKS
+      mkdir -p $CRAFT_PRIME/etc/rabbitmq/conf.d
+      cp $CRAFT_PROJECT_DIR/conf.d/logging.conf $CRAFT_PRIME/etc/rabbitmq/conf.d
